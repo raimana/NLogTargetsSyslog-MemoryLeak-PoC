@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xsd:element name="ASNMessage" type="docTypeRef_ASNMessageType" />
+   <xsd:complexType name="docTypeRef_ASNMessageType">
+      <xsd:sequence>
+         <xsd:element name="TransactionInfo" nillable="true" form="qualified" type="docTypeRef_TransactionInfoType" minOccurs="0" />
+         <xsd:element name="ASN" nillable="true" form="qualified" type="docTypeRef_ASNType" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_TransactionInfoType">
+      <xsd:sequence>
+         <xsd:element name="MessageSender" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="MessageRecipient" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="MessageID" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Created" nillable="true" form="qualified" type="xsd:dateTime" minOccurs="0" />
+         <xsd:element name="FileName" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="MessageOriginator" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_ASNType">
+      <xsd:sequence>
+         <xsd:element name="ASNMessageID" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element minOccurs="1" form="qualified" name="PurposeCode">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string">
+                  <xsd:enumeration value="Create" />
+                  <xsd:enumeration value="Replace" />
+                  <xsd:enumeration value="Delete" />
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Trigger" nillable="true" form="qualified" type="docTypeRef_StringList" minOccurs="0" />
+         <xsd:element name="TriggerDetail" nillable="true" form="qualified" type="docTypeRef_TriggerDetailType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="ProcessingInstructions" nillable="true" form="qualified" type="docTypeRef_StringList" minOccurs="0" />
+         <xsd:element name="ShipmentID" form="qualified" minOccurs="1">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string">
+                  <xsd:minLength value="1" />
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ShipmentType" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ShipmentStatus" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="PartyInfo" nillable="true" form="qualified" type="docTypeRef_PartyInfoType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="Mode" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Carrier" form="qualified" type="docTypeRef_PartyType" minOccurs="1" />
+         <xsd:element name="Voyage" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Vessel" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Routing" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="OriginCity" nillable="true" form="qualified" type="docTypeRef_CityType" minOccurs="0" />
+         <xsd:element name="PortOfLoading" nillable="true" form="qualified" type="docTypeRef_CityType" minOccurs="0" />
+         <xsd:element name="PortOfDischarge" nillable="true" form="qualified" type="docTypeRef_CityType" minOccurs="0" />
+         <xsd:element name="BLDestination" nillable="true" form="qualified" type="docTypeRef_CityType" minOccurs="0" />
+         <xsd:element name="EstBLDestDate" nillable="true" form="qualified" type="empty-dateTime" minOccurs="0" />
+         <xsd:element name="EstOnBoardDate" nillable="true" form="qualified" type="empty-dateTime" minOccurs="0" />
+         <xsd:element name="EstDepartDate" nillable="true" form="qualified" type="empty-dateTime" minOccurs="0" />
+         <xsd:element name="EstDischargePortDate" nillable="true" form="qualified" type="empty-dateTime" minOccurs="0" />
+         <xsd:element name="ChargeableWeight" nillable="true" form="qualified" type="docTypeRef_WeightTypeAttr" minOccurs="0" />
+         <xsd:element name="DimensionalWeight" nillable="true" form="qualified" type="docTypeRef_WeightTypeAttr" minOccurs="0" />
+         <xsd:element name="ActualWeight" nillable="true" form="qualified" type="docTypeRef_WeightTypeAttr" minOccurs="0" />
+         <xsd:element name="Volume" nillable="true" form="qualified" type="docTypeRef_VolumeType" minOccurs="0" />
+         <xsd:element name="LadingQuantity" nillable="true" form="qualified" type="docTypeRef_CountableType" minOccurs="0" />
+         <xsd:element name="Charges" nillable="true" form="qualified" type="docTypeRef_CostType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="References" nillable="true" form="qualified" type="docTypeRef_ReferenceType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="ReferenceDates" nillable="true" form="qualified" type="docTypeRef_DateType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="MilestoneMessage" nillable="true" form="qualified" type="docTypeRef_MilestoneDataMessageType" minOccurs="0" />
+         <xsd:element name="Container" nillable="false" form="qualified" type="docTypeRef_ASNContainerType" minOccurs="1" maxOccurs="unbounded" />
+         <xsd:element name="CustomerData" nillable="true" form="qualified" type="docTypeRef_CustomerData" minOccurs="0" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_StringList">
+      <xsd:sequence>
+         <xsd:element name="StringValue" nillable="true" form="qualified" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_TriggerDetailType">
+      <xsd:sequence>
+         <xsd:element name="Type" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Value" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Status" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_PartyInfoType">
+      <xsd:sequence>
+         <xsd:element name="Type" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Code" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Name" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Address" nillable="true" form="qualified" type="docTypeRef_SimpleAddressType" minOccurs="0" />
+         <xsd:element name="City" nillable="true" form="qualified" type="docTypeRef_CityType" minOccurs="0" />
+         <xsd:element name="PostalCode" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Email" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="References" nillable="true" form="qualified" type="docTypeRef_ReferenceType" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_SimpleAddressType">
+      <xsd:sequence>
+         <xsd:element name="AddressLine" nillable="true" form="qualified" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_CityType">
+      <xsd:sequence>
+         <xsd:element name="CityName" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="CityCode" nillable="true" form="qualified" minOccurs="0" maxOccurs="unbounded">
+            <xsd:complexType>
+               <xsd:simpleContent>
+                  <xsd:extension base="xsd:string">
+                     <xsd:attribute name="Qualifier" type="xsd:string" />
+                  </xsd:extension>
+               </xsd:simpleContent>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="State" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="CountryCode" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="CountryName" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+      </xsd:sequence>
+      <xsd:attribute name="city_id" type="xsd:positiveInteger" />
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_ReferenceType">
+      <xsd:sequence>
+         <xsd:element name="Type" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Value" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_PartyType">
+      <xsd:sequence>
+         <xsd:element name="Name" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Code" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Address" nillable="true" form="qualified" type="docTypeRef_SimpleAddressType" minOccurs="0" />
+         <xsd:element name="Contact" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:simpleType name="docTypeRef_WeightType">
+      <xsd:restriction base="xsd:string">
+         <xsd:whiteSpace value="preserve" />
+         <xsd:minLength value="1" />
+         <xsd:maxLength value="255" />
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:complexType name="docTypeRef_WeightTypeAttr">
+      <xsd:simpleContent>
+         <xsd:extension base="docTypeRef_WeightType">
+            <xsd:attribute name="Unit" type="xsd:string" />
+            <xsd:attribute name="ANSICode" type="xsd:string" />
+         </xsd:extension>
+      </xsd:simpleContent>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_VolumeType">
+      <xsd:simpleContent>
+         <xsd:extension base="xsd:decimal">
+            <xsd:attribute name="Unit" type="xsd:string" />
+            <xsd:attribute name="ANSICode" type="xsd:string" />
+         </xsd:extension>
+      </xsd:simpleContent>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_CountableType">
+      <xsd:simpleContent>
+         <xsd:extension base="xsd:double">
+            <xsd:attribute name="Unit" type="xsd:string" />
+            <xsd:attribute name="ANSICode" type="xsd:string" />
+         </xsd:extension>
+      </xsd:simpleContent>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_CostType">
+      <xsd:simpleContent>
+         <xsd:extension base="xsd:double">
+            <xsd:attribute name="Type" type="xsd:string" />
+            <xsd:attribute name="Currency" type="xsd:string" />
+         </xsd:extension>
+      </xsd:simpleContent>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_DateType">
+      <xsd:sequence>
+         <xsd:element name="ReferenceDateType" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ReferenceDate" nillable="true" form="qualified" type="empty-dateTime" minOccurs="0" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_MilestoneDataMessageType">
+      <xsd:sequence>
+         <xsd:element name="TransactionInfo" nillable="true" form="qualified" type="docTypeRef_TransactionInfoType" minOccurs="0" />
+         <xsd:element name="OneMilestoneMultipleReferences" nillable="true" form="qualified" type="docTypeRef_OneMilestoneMultipleReferencesType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="OneReferenceMultipleMilestones" nillable="true" form="qualified" type="docTypeRef_OneReferenceMultipleMilestonesType" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_OneMilestoneMultipleReferencesType">
+      <xsd:sequence>
+         <xsd:element name="MilestoneInfo" nillable="true" form="qualified" type="docTypeRef_MilestoneInfoType" minOccurs="0" />
+         <xsd:element name="ReferenceInfo" nillable="true" form="qualified" type="docTypeRef_ReferenceInfoType" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_MilestoneInfoType">
+      <xsd:sequence>
+         <xsd:element name="PurposeCode" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ProcessingStatus" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="MilestoneMessageRecipient" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="MilestoneMessageID" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="MilestoneTypeCode" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="MilestoneTypeName" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="MilestoneFormatId" nillable="true" form="qualified" type="xsd:int" minOccurs="0" />
+         <xsd:element name="MilestoneReasonCode" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="MilestoneTime" nillable="true" form="qualified" type="docTypeRef_MilestoneTimeType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="City" nillable="true" form="qualified" type="docTypeRef_CityType" minOccurs="0" />
+         <xsd:element name="CustomMilestoneField" nillable="true" form="qualified" type="docTypeRef_CustomMilestoneFieldType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="Comments" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ExtraMilestoneInfoId" nillable="true" form="qualified" type="docTypeRef_ExtraMilestoneInfoIdType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="UserDefinedData" nillable="true" form="qualified" minOccurs="0">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="UserDefinedChar1" nillable="true" form="qualified" type="string100" minOccurs="0" />
+                  <xsd:element name="UserDefinedChar2" nillable="true" form="qualified" type="string100" minOccurs="0" />
+                  <xsd:element name="UserDefinedChar3" nillable="true" form="qualified" type="string100" minOccurs="0" />
+                  <xsd:element name="UserDefinedChar4" nillable="true" form="qualified" type="string100" minOccurs="0" />
+                  <xsd:element name="UserDefinedChar5" nillable="true" form="qualified" type="string100" minOccurs="0" />
+                  <xsd:element name="UserDefinedInt1" nillable="true" form="qualified" type="xsd:integer" minOccurs="0" />
+                  <xsd:element name="UserDefinedInt2" nillable="true" form="qualified" type="xsd:integer" minOccurs="0" />
+                  <xsd:element name="UserDefinedInt3" nillable="true" form="qualified" type="xsd:integer" minOccurs="0" />
+                  <xsd:element name="UserDefinedInt4" nillable="true" form="qualified" type="xsd:integer" minOccurs="0" />
+                  <xsd:element name="UserDefinedInt5" nillable="true" form="qualified" type="xsd:integer" minOccurs="0" />
+                  <xsd:element name="UserDefinedFloat1" nillable="true" form="qualified" type="xsd:float" minOccurs="0" />
+                  <xsd:element name="UserDefinedFloat2" nillable="true" form="qualified" type="xsd:float" minOccurs="0" />
+                  <xsd:element name="UserDefinedFloat3" nillable="true" form="qualified" type="xsd:float" minOccurs="0" />
+                  <xsd:element name="UserDefinedFloat4" nillable="true" form="qualified" type="xsd:float" minOccurs="0" />
+                  <xsd:element name="UserDefinedFloat5" nillable="true" form="qualified" type="xsd:float" minOccurs="0" />
+                  <xsd:element name="UserDefinedDate1" nillable="true" form="qualified" type="empty-dateTime" minOccurs="0" />
+                  <xsd:element name="UserDefinedDate2" nillable="true" form="qualified" type="empty-dateTime" minOccurs="0" />
+                  <xsd:element name="UserDefinedDate3" nillable="true" form="qualified" type="empty-dateTime" minOccurs="0" />
+                  <xsd:element name="UserDefinedDate4" nillable="true" form="qualified" type="empty-dateTime" minOccurs="0" />
+                  <xsd:element name="UserDefinedDate5" nillable="true" form="qualified" type="empty-dateTime" minOccurs="0" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_MilestoneTimeType">
+      <xsd:attribute name="dateTime" type="xsd:dateTime" use="required" />
+      <xsd:attribute name="timeZone" type="xsd:string" />
+      <xsd:attribute name="whichTime" use="required">
+         <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+               <xsd:whiteSpace value="preserve" />
+               <xsd:enumeration value="EventTime" />
+               <xsd:enumeration value="GTNexusReceiveTime" />
+               <xsd:enumeration value="GTNexusStartedProcessingTime" />
+               <xsd:enumeration value="OutlookTime" />
+            </xsd:restriction>
+         </xsd:simpleType>
+      </xsd:attribute>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_CustomMilestoneFieldType">
+      <xsd:attribute name="info" type="xsd:string" />
+      <xsd:attribute name="infoType" type="xsd:string" />
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_ExtraMilestoneInfoIdType">
+      <xsd:attribute name="info" type="xsd:string" />
+      <xsd:attribute name="type">
+         <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+               <xsd:whiteSpace value="preserve" />
+               <xsd:enumeration value="CarrierCode" />
+               <xsd:enumeration value="CarrierName" />
+               <xsd:enumeration value="Mode" />
+               <xsd:enumeration value="CharLabel" />
+               <xsd:enumeration value="CharValue" />
+               <xsd:enumeration value="UserDefinedMilestoneChar1" />
+               <xsd:enumeration value="UserDefinedMilestoneChar2" />
+               <xsd:enumeration value="UserDefinedMilestoneChar3" />
+               <xsd:enumeration value="UserDefinedMilestoneChar4" />
+               <xsd:enumeration value="UserDefinedMilestoneChar5" />
+            </xsd:restriction>
+         </xsd:simpleType>
+      </xsd:attribute>
+   </xsd:complexType>
+   <xsd:simpleType name="string100">
+      <xsd:restriction base="xsd:string">
+         <xsd:whiteSpace value="preserve" />
+         <xsd:minLength value="1" />
+         <xsd:maxLength value="100" />
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:complexType name="docTypeRef_ReferenceInfoType">
+      <xsd:sequence>
+         <xsd:element name="ReferenceId" nillable="true" form="qualified" type="docTypeRef_ReferenceIdType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="OrderClass" nillable="true" form="qualified" type="docTypeRef_OrderClassType" minOccurs="0" />
+         <xsd:element name="ShipWindow" nillable="true" form="qualified" type="docTypeRef_ShipWindowType" minOccurs="0" />
+         <xsd:element name="Quantity" nillable="true" form="qualified" minOccurs="0">
+            <xsd:complexType>
+               <xsd:simpleContent>
+                  <xsd:extension base="xsd:double">
+                     <xsd:attribute name="Unit" type="xsd:string" />
+                     <xsd:attribute name="ANSICode" type="xsd:string" />
+                     <xsd:attribute name="AddQuantity" type="BooleanType" />
+                     <xsd:attribute name="AutoFillQuantity" type="BooleanType" />
+                  </xsd:extension>
+               </xsd:simpleContent>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="QuantityUnit" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ExtraReferences" nillable="true" form="qualified" type="docTypeRef_ReferenceType" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_ReferenceIdType">
+      <xsd:attribute name="reference" type="xsd:string" />
+      <xsd:attribute name="type">
+         <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+               <xsd:whiteSpace value="preserve" />
+               <xsd:enumeration value="BLNumber" />
+               <xsd:enumeration value="ProNumber" />
+               <xsd:enumeration value="ContainerNumber" />
+               <xsd:enumeration value="ShipmentID" />
+               <xsd:enumeration value="PONumber" />
+               <xsd:enumeration value="DivisionIdentifier" />
+               <xsd:enumeration value="LineItemNumber" />
+               <xsd:enumeration value="ProductCode" />
+               <xsd:enumeration value="ProductName" />
+               <xsd:enumeration value="FinalDestinationCode" />
+               <xsd:enumeration value="ContainerLoadCode" />
+               <xsd:enumeration value="Vessel" />
+               <xsd:enumeration value="Voyage" />
+               <xsd:enumeration value="UserDefCharFld1" />
+               <xsd:enumeration value="UserDefCharFld2" />
+               <xsd:enumeration value="UserDefCharFld3" />
+               <xsd:enumeration value="BookingNumber" />
+            </xsd:restriction>
+         </xsd:simpleType>
+      </xsd:attribute>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_OrderClassType">
+      <xsd:sequence>
+         <xsd:element name="Code" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Name" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_ShipWindowType">
+      <xsd:sequence>
+         <xsd:element name="StartDate" nillable="true" form="qualified" type="empty-dateTime" minOccurs="0" />
+         <xsd:element name="EndDate" nillable="true" form="qualified" type="empty-dateTime" minOccurs="0" />
+         <xsd:element name="CancelDate" nillable="true" form="qualified" type="empty-dateTime" minOccurs="0" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:simpleType name="BooleanType">
+      <xsd:restriction base="xsd:string">
+         <xsd:whiteSpace value="preserve" />
+         <xsd:enumeration value="Yes" />
+         <xsd:enumeration value="No" />
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:complexType name="docTypeRef_OneReferenceMultipleMilestonesType">
+      <xsd:sequence>
+         <xsd:element name="ReferenceInfo" nillable="true" form="qualified" type="docTypeRef_ReferenceInfoType" minOccurs="0" />
+         <xsd:element name="MilestoneInfo" nillable="true" form="qualified" type="docTypeRef_MilestoneInfoType" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_ASNContainerType">
+      <xsd:sequence>
+         <xsd:element name="LoadPlanName" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ContainerNumber" form="qualified" minOccurs="1">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string">
+                  <xsd:minLength value="1" />
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ContainerType" form="qualified" minOccurs="1">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string">
+                  <xsd:minLength value="1" />
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ContainerTypeName" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ContainerLoad" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="LoadType" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="SealNumber" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Charges" nillable="true" form="qualified" type="docTypeRef_CostType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="ServiceType" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ContractNumber" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ReferenceNumber1" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ReferenceNumber2" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ReferenceNumber3" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ChargeableWeight" nillable="true" form="qualified" type="docTypeRef_WeightTypeAttr" minOccurs="0" />
+         <xsd:element name="DimensionalWeight" nillable="true" form="qualified" type="docTypeRef_WeightTypeAttr" minOccurs="0" />
+         <xsd:element name="ActualWeight" nillable="true" form="qualified" type="docTypeRef_WeightTypeAttr" minOccurs="0" />
+         <xsd:element name="Volume" nillable="true" form="qualified" type="docTypeRef_VolumeType" minOccurs="0" />
+         <xsd:element name="LadingQuantity" nillable="true" form="qualified" type="docTypeRef_CountableType" minOccurs="0" />
+         <xsd:element name="ReasonCodeTypes" nillable="true" form="qualified" type="docTypeRef_ReasoncodesType" minOccurs="0" />
+         <xsd:element name="ReferenceDates" nillable="true" form="qualified" type="docTypeRef_DateType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="References" nillable="true" form="qualified" type="docTypeRef_ReferenceType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="Comments" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="LineItems" nillable="true" form="qualified" type="docTypeRef_ASNLineItemType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="PackUnitList" nillable="true" form="qualified" type="docTypeRef_PackUnitFieldType" minOccurs="0" />
+         <xsd:element name="PackUnitTxnKey" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="CustomerData" nillable="true" form="qualified" type="docTypeRef_CustomerData" minOccurs="0" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_ReasoncodesType">
+      <xsd:sequence>
+         <xsd:element name="ReasonCode" nillable="true" form="qualified" type="docTypeRef_ReasonCodeType" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_ReasonCodeType">
+      <xsd:sequence>
+         <xsd:element name="Type" form="qualified" type="xsd:string" />
+         <xsd:element name="Code" form="qualified" type="xsd:string" />
+         <xsd:element name="Description" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_ASNLineItemType">
+      <xsd:sequence>
+         <xsd:element name="LoadSequence" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="PONumber" form="qualified" minOccurs="1">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string">
+                  <xsd:minLength value="1" />
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="OrderClass" nillable="true" form="qualified" type="docTypeRef_OrderClassType" minOccurs="0" />
+         <xsd:element name="LineItemNumber" form="qualified" minOccurs="1">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string">
+                  <xsd:minLength value="1" />
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="BookingReference" form="qualified" minOccurs="1">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string">
+                  <xsd:minLength value="1" />
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="Quantity" nillable="true" form="qualified" type="docTypeRef_CountableType" minOccurs="0" />
+         <xsd:element name="ProductCode" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ProductName" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="DivisionIdentifier" form="qualified" minOccurs="1">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:string">
+                  <xsd:minLength value="1" />
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:element>
+         <xsd:element name="ShipWindow" nillable="true" form="qualified" type="docTypeRef_ShipWindowType" minOccurs="0" />
+         <xsd:element name="BLNumber" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ProNumber" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="InvoiceNumber" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ManufacturerID" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ChargeableWeight" nillable="true" form="qualified" type="docTypeRef_WeightTypeAttr" minOccurs="0" />
+         <xsd:element name="Weight" nillable="true" form="qualified" type="docTypeRef_WeightTypeAttr" minOccurs="0" />
+         <xsd:element name="Volume" nillable="true" form="qualified" type="docTypeRef_VolumeType" minOccurs="0" />
+         <xsd:element name="InnerPackQuantity" nillable="true" form="qualified" type="docTypeRef_CountableType" minOccurs="0" />
+         <xsd:element name="MasterPackQuantity" nillable="true" form="qualified" type="docTypeRef_CountableType" minOccurs="0" />
+         <xsd:element name="CartonRange" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="PackageCount" nillable="true" form="qualified" type="xsd:integer" minOccurs="0" />
+         <xsd:element name="Origin" nillable="true" form="qualified" type="docTypeRef_CityType" minOccurs="0" />
+         <xsd:element name="PoLineOriginCity" nillable="true" form="qualified" type="docTypeRef_CityType" minOccurs="0" />
+         <xsd:element name="BLDestination" nillable="true" form="qualified" type="docTypeRef_CityType" minOccurs="0" />
+         <xsd:element name="FinalDestination" nillable="true" form="qualified" type="docTypeRef_LocationType" minOccurs="0" />
+         <xsd:element name="HarmonizedCode" nillable="true" form="qualified" type="docTypeRef_StringList" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="ReasonCodeTypes" nillable="true" form="qualified" type="docTypeRef_ReasoncodesType" minOccurs="0" />
+         <xsd:element name="ReferenceDates" nillable="true" form="qualified" type="docTypeRef_DateType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="ReferenceNumber1" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ReferenceNumber2" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ReferenceNumber3" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ReferenceNumber4" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ReferenceNumber5" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ReferenceNumber6" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="References" nillable="true" form="qualified" type="docTypeRef_ReferenceType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="PartyInfo" nillable="true" form="qualified" type="docTypeRef_PartyInfoType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="ItemAttributes" nillable="true" form="qualified" type="docTypeRef_ItemAttributesType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="Assortment" nillable="true" form="qualified" type="docTypeRef_AssortmentType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="Charges" nillable="true" form="qualified" type="docTypeRef_CostType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="ProratedCharges" nillable="true" form="qualified" type="docTypeRef_ChargeType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="MilestoneMessage" nillable="true" form="qualified" type="docTypeRef_MilestoneDataMessageType" minOccurs="0" />
+         <xsd:element name="PackUnitItemIdentifier" nillable="true" form="qualified" type="docTypeRef_StringList" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="CustomerData" nillable="true" form="qualified" type="docTypeRef_CustomerData" minOccurs="0" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_LocationType">
+      <xsd:sequence>
+         <xsd:element name="LocationCode" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Name" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Address" nillable="true" form="qualified" type="docTypeRef_SimpleAddressType" minOccurs="0" />
+         <xsd:element name="City" nillable="true" form="qualified" type="docTypeRef_CityType" minOccurs="0" />
+         <xsd:element name="PostalCode" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_ItemAttributesType">
+      <xsd:sequence>
+         <xsd:element name="Type" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Value" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="References" nillable="true" form="qualified" type="docTypeRef_ReferenceType" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_AssortmentType">
+      <xsd:sequence>
+         <xsd:element name="Sku" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="UPC" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Quantity" nillable="true" form="qualified" type="docTypeRef_CountableType" minOccurs="0" />
+         <xsd:element name="Description" nillable="true" form="qualified" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="MasterPackQuantity" nillable="true" form="qualified" type="docTypeRef_CountableType" minOccurs="0" />
+         <xsd:element name="InnerPackQuantity" nillable="true" form="qualified" type="docTypeRef_CountableType" minOccurs="0" />
+         <xsd:element name="InnersPerMaster" nillable="true" form="qualified" type="xsd:double" minOccurs="0" />
+         <xsd:element name="CartonCount" nillable="true" form="qualified" type="xsd:integer" minOccurs="0" />
+         <xsd:element name="CartonRange" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="TotalWeight" nillable="true" form="qualified" type="docTypeRef_WeightTypeAttr" minOccurs="0" />
+         <xsd:element name="TotalVolume" nillable="true" form="qualified" type="docTypeRef_VolumeType" minOccurs="0" />
+         <xsd:element name="FirstCostPrice" nillable="true" form="qualified" type="docTypeRef_PriceType" minOccurs="0" />
+         <xsd:element name="LandedCostPrice" nillable="true" form="qualified" type="docTypeRef_PriceType" minOccurs="0" />
+         <xsd:element name="RetailCostPrice" nillable="true" form="qualified" type="docTypeRef_PriceType" minOccurs="0" />
+         <xsd:element name="HarmonizedCodeInfo" nillable="true" form="qualified" type="docTypeRef_HarmonizedCodeType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="References" nillable="true" form="qualified" type="docTypeRef_ReferenceType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="ItemAttributes" nillable="true" form="qualified" type="docTypeRef_ItemAttributesType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="PackUnitItemIdentifier" nillable="true" form="qualified" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_PriceType">
+      <xsd:simpleContent>
+         <xsd:extension base="xsd:double">
+            <xsd:attribute name="Currency" type="xsd:string" />
+         </xsd:extension>
+      </xsd:simpleContent>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_HarmonizedCodeType">
+      <xsd:sequence>
+         <xsd:element name="References" nillable="true" form="qualified" type="docTypeRef_ReferenceType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="ReferenceValues" nillable="true" form="qualified" type="docTypeRef_ReferenceValueType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="HarmonizedAttributes" nillable="true" form="qualified" type="docTypeRef_ItemAttributesType" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_ReferenceValueType">
+      <xsd:sequence>
+         <xsd:element name="Type" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Value" nillable="true" form="qualified" type="xsd:double" minOccurs="0" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_ChargeType">
+      <xsd:sequence>
+         <xsd:element name="Code" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Name" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Description" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="Category" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="OriginalLevel" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="ChargeDate" nillable="true" form="qualified" type="empty-dateTime" minOccurs="0" />
+         <xsd:element name="ProrateDate" nillable="true" form="qualified" type="empty-dateTime" minOccurs="0" />
+         <xsd:element name="ProratedValueOriginalCurrency" nillable="true" form="qualified" type="docTypeRef_ChargeValueType" minOccurs="0" />
+         <xsd:element name="ExchangeRate" nillable="true" form="qualified" type="docTypeRef_ExchangeRateType" minOccurs="0" />
+         <xsd:element name="ProratedValueConvertedCurrency" nillable="true" form="qualified" type="docTypeRef_ChargeValueType" minOccurs="0" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_ChargeValueType">
+      <xsd:simpleContent>
+         <xsd:extension base="xsd:double">
+            <xsd:attribute name="Currency" type="xsd:string" />
+         </xsd:extension>
+      </xsd:simpleContent>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_ExchangeRateType">
+      <xsd:simpleContent>
+         <xsd:extension base="xsd:double">
+            <xsd:attribute name="Date" type="xsd:dateTime" use="required" />
+            <xsd:attribute name="SourceCurrency" type="xsd:string" use="required" />
+            <xsd:attribute name="TargetCurrency" type="xsd:string" use="required" />
+         </xsd:extension>
+      </xsd:simpleContent>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_CustomerData">
+      <xsd:sequence>
+         <xsd:element name="References" nillable="true" form="qualified" type="docTypeRef_CustReferenceType" minOccurs="0" maxOccurs="unbounded" />
+         <xsd:element name="UserDefined" nillable="true" form="qualified" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_CustReferenceType">
+      <xsd:sequence>
+         <xsd:element name="Type" nillable="true" form="qualified" type="xsd:string" />
+         <xsd:element name="Value" nillable="true" form="qualified" type="xsd:string" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_PackUnitFieldType">
+      <xsd:sequence>
+         <xsd:element name="PackUnit" nillable="true" form="qualified" type="docTypeRef_PackUnitType" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_PackUnitType">
+      <xsd:sequence>
+         <xsd:element name="PackUnitHeader" form="qualified" type="docTypeRef_PackUnitHeaderType" />
+         <xsd:element name="PackUnitItemList" form="qualified" type="docTypeRef_PackUnitItemFieldType" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_PackUnitHeaderType">
+      <xsd:sequence>
+         <xsd:element name="LPN" form="qualified" type="String255Type" />
+         <xsd:element name="PackUnitNo" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="PalletId" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="LOTNumber" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="PackUnitType" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="PackUnitSizeType" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="LastPackUnit" nillable="true" form="qualified" type="xsd:boolean" minOccurs="0" />
+         <xsd:element name="MixedPackUnit" nillable="true" form="qualified" type="xsd:boolean" minOccurs="0" />
+         <xsd:element name="Archive" nillable="true" form="qualified" type="xsd:boolean" minOccurs="0" />
+         <xsd:element name="Dimension" nillable="true" form="qualified" type="docTypeRef_DimensionType" minOccurs="0" />
+         <xsd:element name="Quantity" nillable="true" form="qualified" type="docTypeRef_CountableType" minOccurs="0" />
+         <xsd:element name="Weight" nillable="true" form="qualified" type="docTypeRef_WeightTypeAttr" minOccurs="0" />
+         <xsd:element name="LabelStatus" nillable="true" form="qualified" type="docTypeRef_WeightTypeAttr" minOccurs="0" />
+         <xsd:element name="PackUnitStatus" nillable="true" form="qualified" type="docTypeRef_WeightTypeAttr" minOccurs="0" />
+         <xsd:element name="ReferenceList" nillable="true" form="qualified" type="docTypeRef_ReferenceFieldType" minOccurs="0" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:simpleType name="String255Type">
+      <xsd:restriction base="xsd:string">
+         <xsd:whiteSpace value="preserve" />
+         <xsd:minLength value="1" />
+         <xsd:maxLength value="255" />
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:complexType name="docTypeRef_DimensionType">
+      <xsd:sequence>
+         <xsd:element name="DimensionInfo" form="qualified" type="docTypeRef_Dimension" />
+      </xsd:sequence>
+      <xsd:attribute name="Unit" type="xsd:string" />
+      <xsd:attribute name="ANSICode" type="xsd:string" />
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_Dimension">
+      <xsd:sequence>
+         <xsd:element name="Length" nillable="true" form="qualified" type="xsd:double" minOccurs="0" />
+         <xsd:element name="Width" nillable="true" form="qualified" type="xsd:double" minOccurs="0" />
+         <xsd:element name="Height" nillable="true" form="qualified" type="xsd:double" minOccurs="0" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_ReferenceFieldType">
+      <xsd:sequence>
+         <xsd:element name="Reference" form="qualified" type="docTypeRef_ReferenceType" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_PackUnitItemFieldType">
+      <xsd:sequence>
+         <xsd:element name="PackUnitItem" form="qualified" type="docTypeRef_PackUnitItemType" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="docTypeRef_PackUnitItemType">
+      <xsd:sequence>
+         <xsd:element name="PackUnitItemIdentifier" nillable="true" form="qualified" type="xsd:string" minOccurs="0" />
+         <xsd:element name="PONumber" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="POReference" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="POUserDefCharFld1" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="POUserDefCharFld2" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="POObjIdKey" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="POLineNum" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="ProductCode" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="ProductRefNum" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="POLineUserDefCharFld1" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="POLineUserDefCharFld2" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="FinalDestinationCode" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="ShipWindowEnd" nillable="true" form="qualified" type="empty-dateTime" minOccurs="0" />
+         <xsd:element name="POLineObjIdKey" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="Color" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="Size" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="SizeCategory" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="Dimension" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="UPC" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="AssortmentUserDefChar1" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="AssortmentUserDefChar2" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="AssortmentUserDefChar3" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="AssortmentUserDefChar4" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="AssortmentUserDefChar5" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="EAN" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="PackType" nillable="true" form="qualified" type="String50Type" minOccurs="0" />
+         <xsd:element name="QuotaCategoryNum" nillable="true" form="qualified" type="String255Type" minOccurs="0" />
+         <xsd:element name="Quantity" nillable="true" form="qualified" type="docTypeRef_CountableType" minOccurs="0" />
+         <xsd:element name="Weight" nillable="true" form="qualified" type="docTypeRef_WeightTypeAttr" minOccurs="0" />
+         <xsd:element name="NetWeight" nillable="true" form="qualified" type="docTypeRef_WeightTypeAttr" minOccurs="0" />
+         <xsd:element name="NetNetWeight" nillable="true" form="qualified" type="docTypeRef_WeightTypeAttr" minOccurs="0" />
+         <xsd:element name="Volume" nillable="true" form="qualified" type="docTypeRef_VolumeType" minOccurs="0" />
+         <xsd:element name="ReferenceList" nillable="true" form="qualified" type="docTypeRef_ReferenceFieldType" minOccurs="0" />
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:simpleType name="String50Type">
+      <xsd:restriction base="xsd:string">
+         <xsd:whiteSpace value="preserve" />
+         <xsd:minLength value="1" />
+         <xsd:maxLength value="50" />
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="empty">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="" />
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="empty-dateTime">
+      <xsd:union memberTypes="xsd:dateTime empty" />
+   </xsd:simpleType>
+</xsd:schema>
